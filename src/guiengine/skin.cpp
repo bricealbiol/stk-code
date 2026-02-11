@@ -2466,6 +2466,12 @@ void Skin::drawTooltip(Widget* widget, bool atMouse)
         pos.X = margin;
     }
 
+    if (pos.Y + (int)size.Height > (int)screen_size.Height - margin)
+    {
+
+        pos.Y -= (size.Height + 30);
+    }
+
     core::recti r(pos, size);
     drawBoxFromStretchableTexture(widget, r,
                               SkinConfig::m_render_params["tooltip::neutral"]);

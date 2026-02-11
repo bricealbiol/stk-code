@@ -341,10 +341,15 @@ void KartSelectionScreen::beforeAddingWidget()
     // Add other groups after
     for (int n=0; n<group_amount; n++)
     {
-        if (groups[n] == "standard") // Fix capitalization (#4622)
+        if (groups[n] == "standard") { // Fix capitalization (#4622)
             tabs->addTextChild( _("Standard") , groups[n]);
-        else // Try to translate group names
+            Widget* standard_tab = tabs->findWidgetNamed("standard");
+            if (standard_tab != NULL)
+                standard_tab->setTooltip(_("I have to be above !"));
+        }
+        else { // Try to translate group names
             tabs->addTextChild( _(groups[n].c_str()) , groups[n]);
+        }
     } // for n<group_amount
 
     const std::vector<std::string> &classes = kart_properties_manager->getAllKartTypes();
